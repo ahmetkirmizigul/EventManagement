@@ -5,11 +5,6 @@ using EventManagement.DataAccess;
 
 namespace EventManagement.Controllers;
 
-//TO DO : 
-//Anasayfaya iki controller için de buton koyulacak.
-//ekleme işlemin de katılımcılar daha iyi gösterilecek
-
-
 public class EventController : Controller
 {
     private readonly ApplicationDbContext _context;
@@ -31,7 +26,6 @@ public class EventController : Controller
     {
         var participants = _context.Participants.ToList();
 
-        // Eğer sistemde hiç katılımcı yoksa boş liste döndür.
         ViewBag.Participants = participants ?? new List<Participant>();
 
         return View();
@@ -51,7 +45,6 @@ public class EventController : Controller
         _context.Events.Add(model);
         await _context.SaveChangesAsync();
 
-        // Seçilen katılımcıları kontrol et ve ilişkilendir
         if (SelectedParticipants != null && SelectedParticipants.Length > 0)
         {
             foreach (var participantId in SelectedParticipants)

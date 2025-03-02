@@ -37,7 +37,7 @@
         .then(response => response.json())
         .then(data => {
             let list = document.getElementById("participantList");
-            list.innerHTML = ""; // Önce listeyi temizle
+            list.innerHTML = ""; 
             data.forEach(p => {
                 let li = document.createElement("li");
                 li.textContent = p.firstName + " " + p.lastName;
