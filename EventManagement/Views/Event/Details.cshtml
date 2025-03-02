@@ -1,0 +1,48 @@
+﻿@model EventManagement.Models.Event
+
+<h2>@Model.Title</h2>
+
+<table class="table">
+    <tr>
+        <th>Başlık:</th>
+        <td>@Model.Title</td>
+    </tr>
+    <tr>
+        <th>Tarih:</th>
+        <td>@Model.Date.ToString("dd/MM/yyyy")</td>
+    </tr>
+    <tr>
+        <th>Yer:</th>
+        <td>@Model.Location</td>
+    </tr>
+    <tr>
+        <th>Ayrıntılar:</th>
+        <td>@Model.Details</td>
+    </tr>
+</table>
+
+<h3>Katılımcılar</h3>
+<ul id="participantList">
+    @foreach (var ep in Model.EventParticipants)
+    {
+        <li>@ep.Participant.FirstName @ep.Participant.LastName</li>
+    }
+</ul>
+
+<a asp-action="Index" class="btn btn-secondary">Geri Dön</a>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        fetch('/Event/GetParticipants/@Model.Id')
+        .then(response => response.json())
+        .then(data => {
+            let list = document.getElementById("participantList");
+            list.innerHTML = ""; // Önce listeyi temizle
+            data.forEach(p => {
+                let li = document.createElement("li");
+                li.textContent = p.firstName + " " + p.lastName;
+                list.appendChild(li);
+            });
+        });
+    });
+</script>

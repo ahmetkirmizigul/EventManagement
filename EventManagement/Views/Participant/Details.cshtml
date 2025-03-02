@@ -1,0 +1,20 @@
+﻿@model EventManagement.Models.Participant
+
+<h2>Katılımcı Detayları</h2>
+
+<table class="table">
+    <tr>
+        <th>Ad:</th>
+        <td>@Model.FirstName</td>
+    </tr>
+    <tr>
+        <th>Soyad:</th>
+        <td>@Model.LastName</td>
+    </tr>
+    <tr>
+        <th>E-posta:</th>
+        <td>@Model.Email</td>
+    </tr>
+</table>
+
+<a asp-action="Index" class="btn btn-secondary">Geri Dön</a>
